@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://dx46qya83i3kb"]
+
+[ext_resource type="Texture2D" uid="uid://c65etv7m4medi" path="res://icon.svg" id="1_y1131"]
+[ext_resource type="FontFile" uid="uid://k63u3i07seuw" path="res://assets/fonts/Tiny5-Regular.ttf" id="2_evvwe"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="2_q5qod"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="3_63hxe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o0813"]
+size = Vector2(1152, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ql24t"]
+size = Vector2(20, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxhuh"]
+size = Vector2(40, 40)
+
+[node name="Main" type="Sprite2D"]
+texture_filter = 1
+position = Vector2(545, 309)
+texture = ExtResource("1_y1131")
+script = ExtResource("2_q5qod")
+
+[node name="Borders" type="StaticBody2D" parent="."]
+
+[node name="BackGround" type="ColorRect" parent="Borders"]
+offset_left = -545.0
+offset_top = -309.0
+offset_right = 607.0
+offset_bottom = 339.0
+color = Color(0, 0, 0, 1)
+
+[node name="Top" type="CollisionShape2D" parent="Borders"]
+position = Vector2(31, -319)
+shape = SubResource("RectangleShape2D_o0813")
+
+[node name="Bottom" type="CollisionShape2D" parent="Borders"]
+position = Vector2(31, 349)
+shape = SubResource("RectangleShape2D_o0813")
+
+[node name="Left" type="CollisionShape2D" parent="Borders"]
+position = Vector2(-555, 15)
+shape = SubResource("RectangleShape2D_ql24t")
+
+[node name="Right" type="CollisionShape2D" parent="Borders"]
+position = Vector2(617, 15)
+shape = SubResource("RectangleShape2D_ql24t")
+
+[node name="Zombie" type="CharacterBody2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Zombie"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Zombie"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_yxhuh")
+
+[node name="Player" type="StaticBody2D" parent="."]
+script = ExtResource("3_63hxe")
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_yxhuh")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Round" type="Label" parent="HUD"]
+offset_top = 625.0
+offset_right = 51.0
+offset_bottom = 648.0
+theme_override_fonts/font = ExtResource("2_evvwe")
+text = "Round: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Start" type="Timer" parent="."]
+one_shot = true
+autostart = true
